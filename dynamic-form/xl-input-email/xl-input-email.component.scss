@@ -1,0 +1,206 @@
+@import '../../styles/base/spacing';
+
+$white: #fff;
+$success-color: #333339;
+$error-color: #C40D42;
+$placeholder-color: #99999C;
+$anchor-color: #164396;
+
+.form-group  {
+    overflow: hidden;
+}
+
+.xl__input-group {
+    position: relative;
+    display: block;
+    clear: both;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 0;
+
+    & textarea {
+        height: 122px;
+        border-radius: 2px;
+        background-color: #FAFBFC;
+    }
+
+    & input[type]:not([type=search]):not([type=url]):not([type=hidden]):not([type=file]):not([type=radio]) {
+        height: 50px;
+        font-size: 14px;
+    }
+
+    & textarea::placeholder,
+    & input[type]:not([type=search]):not([type=url]):not([type=hidden]):not([type=file]):not([type=radio])::placeholder {
+        color: $placeholder-color;
+    }
+
+    .xl__input-label {
+        color: #333339;
+        font-size: 14px;
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .xl__input {
+        position: relative;
+        display: block;
+        appearance: none;
+        border: 2px solid transparent;
+        border-radius: 2px;
+        outline: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px 16px;
+        font-size: 14px;
+        margin: 0;
+        transition: all .2s ease-in-out;
+        // background: #f2f2f2;
+        background: #fafbfc;
+
+        &.state--prepaid {
+            &:focus {
+                border: 2px solid var(--color__primary-2);
+            }
+        }
+
+        &.state--postpaid {
+            &:focus {
+                border: 2px solid var(--color__primary-2);
+            }
+        }
+
+        &.state--error {}
+
+        & {
+            &:focus {
+                border: 2px solid var(--color__primary-2);
+            }
+        }
+
+    }
+
+    .xl__input-img {
+        position: absolute;
+        top: 5px;
+        width: 40px;
+        height: 40px;
+        right: 16px;
+        text-align: center;
+
+        img {
+            width: 24px;
+            margin-top: 8px;
+            height: 24px;
+        }
+
+    }
+
+    .xl__input-error {
+        font-size: 12px;
+        background-color: $error-color;
+        color: #fff;
+        box-sizing: border-box;
+        padding: 6px 16px;
+        -webkit-animation: fadein 2s;
+        /* Safari, Chrome and Opera > 12.1 */
+        -moz-animation: fadein 2s;
+        /* Firefox < 16 */
+        -ms-animation: fadein 2s;
+        /* Internet Explorer */
+        -o-animation: fadein 2s;
+        /* Opera < 12.1 */
+        animation: fadein 2s;
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    &.recaptcha-error {
+        border: 2px solid $error-color;
+        width: auto;
+        display: inline-block;
+
+        &.xl__input-error {
+        }
+
+    }
+
+    .xl__input-hint {
+        margin-left: 20px;
+        text-align: right;
+        padding-top: 5px;
+        font-size: 10px;
+        color: #575551;
+    }
+}
+
+// .arrow__focus, 
+.xl__input-group:after {
+    position: absolute;
+    content: ' ';
+    display: block;
+    top: 2px;
+    left: 16px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--color__primary-2);
+    transition: visibility .1s ease-in-out;
+    visibility: hidden;
+
+    &.state--postpaid {
+        border-top: 5px solid #000007;
+    }
+
+    &.state--error,
+    .visible {
+        visibility: visible;
+    }
+}
+
+.xl__input-group.focused {
+    &:after {
+        visibility: visible;
+    }
+}
+
+.xl__input-group.state--error {
+    &:after {
+        visibility: visible;
+    }
+
+    & .xl__input {
+        border: 2px solid $error-color !important;
+    }
+
+    &:after {
+        border-top: 5px solid $error-color !important;
+    }
+}
+
+.password-show-hide-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+
+    & .password-show-hide-icon {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        flex: 1;
+        cursor: pointer;
+
+        & img {
+            height: 36px;
+        }
+    }
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    /* Firefox */
+}

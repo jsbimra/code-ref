@@ -1,0 +1,113 @@
+<section class="section space--lg has--background-light headerline footerline xlform-section"
+    [ngClass]="bg" *ngIf="!successFlag && !resErrorMessage">
+
+    <div class="space--lg corner-radius">
+        <div class="container form-container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 imgform" [ngClass]="formpos === 'right'? 'toright' : 'toleft' ">
+                    <div class="floating-image" [ngStyle]="{'background-image': 'url('+bgform+')'}"
+                        [ngClass]="formpos === 'right'? 'clipleft' : 'clipright'">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12" [ngClass]="formpos === 'right'? 'formsideleft' : 'formsideright'">
+                    <div class="form-header">
+                        <h2 [innerHTML]="title"> </h2>
+                        <p [innerHTML]="subtitle"> </p>
+                    </div>
+
+                    <form [formGroup]="xlForm" class="form" method="POST" enctype="multipart/form-data"
+                        (submit)="onFormSubmit($event)">
+                        <xl-input-email 
+                            [required]="data.email.required" 
+                            [placeholder]="data.email.placeholder" 
+                            [label]="data.email.label" 
+                            [value]="data.email.value"
+                            [xlFormGroup]="xlForm"
+                            [xlField]="formFields[0]">
+                        </xl-input-email>
+
+                        <xl-input-password 
+                            [required]="data.password.required"
+                            [bgImage]="true"
+                            [hint]="data.password.hint"
+                            [placeholder]="data.password.placeholder" 
+                            [label]="data.password.label" 
+                            [value]="data.password.value"
+                            [xlFormGroup]="xlForm" 
+                            [xlField]="formFields[1]">
+                        </xl-input-password>
+
+                        <xl-input 
+                            [required]="data.name.required" 
+                            [minlength]=""
+                            [maxlength]=""
+                            [placeholder]="data.name.placeholder" 
+                            [label]="data.name.label" 
+                            [value]="data.name.value"
+                            [xlFormGroup]="xlForm"
+                            [xlField]="formFields[2]">
+                        </xl-input>
+
+                        <xl-input-phonenumber 
+                            [required]="data.phonenumber.required"
+                            [minlength]="data.phonenumber.minlength"
+                            [maxlength]="data.phonenumber.maxlength"
+                            [hint]="data.phonenumber.hint"
+                            [placeholder]="data.phonenumber.placeholder" 
+                            [label]="data.phonenumber.label" 
+                            [value]="data.phonenumber.value"
+                            [xlFormGroup]="xlForm"
+                            [xlField]="formFields[3]">
+                        </xl-input-phonenumber>
+
+                        <div class="xl__input-group">
+                            <div class="footer__text">
+                                {{data.terms_check.desc_text_1}} <a href="{{data.terms_check.desc_link_1}}" target="{{data.terms_check.desc_link_1_target}}">{{data.terms_check.desc_link_text_1}}</a>
+                                {{data.terms_check.desc_text_2}} <a href="{{data.terms_check.desc_link_2}}" target="{{data.terms_check.desc_link_2_target}}">{{data.terms_check.desc_link_text_2}}</a>
+                            </div>
+                        </div>
+                        
+                        <xl-captcha 
+                            [label]="data.captcha.label"
+                            [xlFormGroup]="xlForm"
+                            [xlField]="formFields[4]">
+                        </xl-captcha>
+                        
+                        <xl-button 
+                            [type]="data.submitButton.type" 
+                            [label]="data.submitButton.label"
+                            [name]="data.submitButton.name"
+                            [disabledOn]="processingRequest"
+                            [xlFormGroup]="xlForm"
+                            [xlField]="formFields[5]"
+                        ></xl-button>
+
+                        <div class="form-group">
+                            <div class="xl__input-group">
+                                <div class="footer__text">
+                                    {{data.login_desc.desc_text_1}} <a href="{{data.login_desc.desc_link_1}}" target="{{data.login_desc.desc_link_1_target}}">{{data.login_desc.desc_link_text_1}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-enterprise-register-form success-error-screen" *ngIf="successFlag || resErrorMessage">
+    <div class="image-holder">
+        <!-- add real image here -->
+        <img *ngIf="successFlag" width="354" src="https://d17e22l2uh4h4n.cloudfront.net/corpweb/pub-xlaxiata/2019-09/submit-form-success.png" alt="success-image" />
+        <img *ngIf="resErrorMessage" width="354" src="https://d17e22l2uh4h4n.cloudfront.net/corpweb/pub-xlaxiata/2019-10/fail-form.png" alt="error-image" />
+    </div>
+    <div *ngIf="successFlag" class="message message--success text-center">
+        <h2 [innerHTML]="data.successMsgTitle"></h2>
+        <label>{{ data.successMsg }}</label>
+    </div>
+    <div *ngIf="resErrorMessage" class="message message--error text-center">
+        <h2 [innerHTML]="data.failedMsgTitle"></h2>
+        <label>{{ resErrorMessage || data.failedMsg }}</label>
+    </div>
+</div>
